@@ -1,24 +1,32 @@
-# Input two strings
-str1 = input("Enter first string: ")
-str2 = input("Enter second string: ")
+import pandas as pd
 
-# Concatenate and store in a new variable
-combined_str = str1 + str2
+# Sample DataFrames
+df1 = pd.DataFrame({
+    'ID': [1, 2, 3],
+    'Name': ['Alice', 'Bob', 'Charlie']
+})
 
-# Display the concatenated string
-print("\nConcatenated String:", combined_str)
+df2 = pd.DataFrame({
+    'ID': [2, 3, 4],
+    'Score': [85, 90, 75]
+})
 
-# Commonly used string methodsIGOT ALA
-print("\n--- String Methods Results ---")
-print("Uppercase       :", combined_str.upper())
-print("Lowercase       :", combined_str.lower())
-print("Title Case      :", combined_str.title())
-print("Capitalized     :", combined_str.capitalize())
-print("Reversed        :", combined_str[::-1])
-print("Length          :", len(combined_str))
-print("Is Alphabetic?  :", combined_str.isalpha())
-print("Is Numeric?     :", combined_str.isnumeric())
-print("Replaced 'a' with '@':", combined_str.replace('a', '@'))
-print("Count of 'a'    :", combined_str.count('a'))
-print("Starts with 'S' :", combined_str.startswith('S'))
-print("Ends with 'h'   :", combined_str.endswith('h'))
+
+inner_merged = pd.merge(df1, df2, on='ID', how='inner')
+print("Inner Merge:\n", inner_merged)
+
+
+
+left_merged = pd.merge(df1, df2, on='ID', how='left')
+print("Left Join:\n", left_merged)
+
+
+right_merged = pd.merge(df1, df2, on='ID', how='right')
+print("Right Join with merge:\n", right_merged)
+
+
+df1_indexed = df1.set_index('ID')
+df2_indexed = df2.set_index('ID')
+
+joined_index = df1_indexed.join(df2_indexed, how='right')
+print("Right Join with join():\n", joined_index)

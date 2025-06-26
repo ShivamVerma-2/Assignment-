@@ -1,32 +1,12 @@
-numbers = [10, 5, 3, 8, 2]
+import  pandas as pd
+# Create 3 DataFrames
+df_a = pd.DataFrame({'ID': [1, 2], 'ValueA': ['A1', 'A2']})
+df_b = pd.DataFrame({'ID': [3, 4], 'ValueA': ['A3', 'A4']})
+df_c = pd.DataFrame({'ID': [2, 3], 'ValueC': ['C2', 'C3']})
 
-smallest = min(numbers)
+# Vertical concatenation
+df_concat = pd.concat([df_a, df_b], axis=0)
 
-print("Smallest number is:", smallest)
-
-
-numbers = [10, 5, 3, 8, 2]
-
-# Remove the largest number first
-max_num = max(numbers)
-numbers.remove(max_num)
-
-# Now find the new max (second largest)
-second_greatest = max(numbers)
-
-print("Second greatest number is:", second_greatest)
-
-
-numbers = [10, 5, 3, 8, 2]
-
-# Remove the smallest number first
-min_num = min(numbers)
-numbers.remove(min_num)
-
-# Now find the new min (second smallest)
-second_smallest = min(numbers)
-
-print("Second smallest number is:", second_smallest)
-
-
-
+# Merge with df_c on common key 'ID'
+merged_df = pd.merge(df_concat, df_c, on='ID', how='inner')
+print("Concatenated and Merged:\n", merged_df)
